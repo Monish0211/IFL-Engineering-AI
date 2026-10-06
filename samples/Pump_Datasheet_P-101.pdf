@@ -1,0 +1,194 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 1587 >>
+stream
+BT /F2 9 Tf 50 800 Td (IFL ENGINEERING ó DEMO PROJECT) Tj ET
+BT /F1 9 Tf 360 800 Td (Doc No: IFL-DEMO-DS-P-101   Rev: B) Tj ET
+BT /F1 8 Tf 50 786 Td (SYNTHETIC DEMO DOCUMENT ó ALL VALUES FICTIONAL ó NOT FOR ENGINEERING USE) Tj ET
+BT /F2 16 Tf 50 756 Td (CENTRIFUGAL PUMP DATASHEET) Tj ET
+BT /F2 11 Tf 50 726 Td (DOCUMENT INFORMATION) Tj ET
+BT /F1 10 Tf 60 706 Td (Project) Tj ET
+BT /F1 10 Tf 300 706 Td (Demo Cooling Water Upgrade \(fictional\)) Tj ET
+BT /F1 10 Tf 60 690 Td (Client) Tj ET
+BT /F1 10 Tf 300 690 Td (Example Client Ltd \(fictional\)) Tj ET
+BT /F1 10 Tf 60 674 Td (Document title) Tj ET
+BT /F1 10 Tf 300 674 Td (Centrifugal Pump Datasheet ó P-101A/B) Tj ET
+BT /F1 10 Tf 60 658 Td (Revision) Tj ET
+BT /F1 10 Tf 300 658 Td (B ó Issued for Purchase) Tj ET
+BT /F2 11 Tf 50 628 Td (1. GENERAL) Tj ET
+BT /F1 10 Tf 60 608 Td (Tag number) Tj ET
+BT /F1 10 Tf 300 608 Td (P-101A/B) Tj ET
+BT /F1 10 Tf 60 592 Td (Service) Tj ET
+BT /F1 10 Tf 300 592 Td (Cooling Water Circulation Pump) Tj ET
+BT /F1 10 Tf 60 576 Td (Quantity) Tj ET
+BT /F1 10 Tf 300 576 Td (2 \(1 operating + 1 standby\)) Tj ET
+BT /F1 10 Tf 60 560 Td (Pump type) Tj ET
+BT /F1 10 Tf 300 560 Td (Horizontal, single-stage, end-suction centrifugal) Tj ET
+BT /F1 10 Tf 60 544 Td (Driver) Tj ET
+BT /F1 10 Tf 300 544 Td (Electric motor) Tj ET
+BT /F1 10 Tf 60 528 Td (Location) Tj ET
+BT /F1 10 Tf 300 528 Td (Outdoor, non-hazardous \(safe\) area) Tj ET
+BT /F1 10 Tf 60 512 Td (Applicable project specification) Tj ET
+BT /F1 10 Tf 300 512 Td (IFL-DEMO-SPEC-MEC-001 \(fictional\)) Tj ET
+BT /F1 9 Tf 270 40 Td (Page 1 of 4) Tj ET
+
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 1900 >>
+stream
+BT /F2 9 Tf 50 800 Td (IFL ENGINEERING ó DEMO PROJECT) Tj ET
+BT /F1 9 Tf 360 800 Td (Doc No: IFL-DEMO-DS-P-101   Rev: B) Tj ET
+BT /F1 8 Tf 50 786 Td (SYNTHETIC DEMO DOCUMENT ó ALL VALUES FICTIONAL ó NOT FOR ENGINEERING USE) Tj ET
+BT /F2 11 Tf 50 756 Td (2. OPERATING CONDITIONS) Tj ET
+BT /F1 10 Tf 60 736 Td (Liquid) Tj ET
+BT /F1 10 Tf 300 736 Td (Cooling water \(treated\)) Tj ET
+BT /F1 10 Tf 60 720 Td (Pumping temperature \(normal / max\)) Tj ET
+BT /F1 10 Tf 300 720 Td (35 ∞C / 45 ∞C) Tj ET
+BT /F1 10 Tf 60 704 Td (Specific gravity at pumping temperature) Tj ET
+BT /F1 10 Tf 300 704 Td (0.994) Tj ET
+BT /F1 10 Tf 60 688 Td (Rated flow) Tj ET
+BT /F1 10 Tf 300 688 Td (250 m≥/h) Tj ET
+BT /F1 10 Tf 60 672 Td (Normal flow) Tj ET
+BT /F1 10 Tf 300 672 Td (220 m≥/h) Tj ET
+BT /F1 10 Tf 60 656 Td (Minimum continuous flow) Tj ET
+BT /F1 10 Tf 300 656 Td (75 m≥/h) Tj ET
+BT /F1 10 Tf 60 640 Td (Suction pressure \(rated\)) Tj ET
+BT /F1 10 Tf 300 640 Td (2.5 barg) Tj ET
+BT /F1 10 Tf 60 624 Td (Discharge pressure \(rated\)) Tj ET
+BT /F1 10 Tf 300 624 Td (8.4 barg) Tj ET
+BT /F1 10 Tf 60 608 Td (Differential pressure) Tj ET
+BT /F1 10 Tf 300 608 Td (5.9 bar) Tj ET
+BT /F1 10 Tf 60 592 Td (Differential head) Tj ET
+BT /F1 10 Tf 300 592 Td (60.5 m) Tj ET
+BT /F1 10 Tf 60 576 Td (NPSH available) Tj ET
+BT /F1 10 Tf 300 576 Td (8.5 m) Tj ET
+BT /F2 11 Tf 50 546 Td (3. DESIGN CONDITIONS) Tj ET
+BT /F1 10 Tf 60 526 Td (Design pressure \(casing\)) Tj ET
+BT /F1 10 Tf 300 526 Td (16 barg) Tj ET
+BT /F1 10 Tf 60 510 Td (Design temperature) Tj ET
+BT /F1 10 Tf 300 510 Td (80 ∞C) Tj ET
+BT /F1 10 Tf 60 494 Td (Casing MAWP) Tj ET
+BT /F1 10 Tf 300 494 Td (16 barg at 80 ∞C) Tj ET
+BT /F1 10 Tf 60 478 Td (Shut-off head \(max. diameter impeller\)) Tj ET
+BT /F1 10 Tf 300 478 Td (74 m) Tj ET
+BT /F1 10 Tf 60 462 Td (Corrosion allowance) Tj ET
+BT /F1 10 Tf 300 462 Td (3 mm) Tj ET
+BT /F1 9 Tf 270 40 Td (Page 2 of 4) Tj ET
+
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 1801 >>
+stream
+BT /F2 9 Tf 50 800 Td (IFL ENGINEERING ó DEMO PROJECT) Tj ET
+BT /F1 9 Tf 360 800 Td (Doc No: IFL-DEMO-DS-P-101   Rev: B) Tj ET
+BT /F1 8 Tf 50 786 Td (SYNTHETIC DEMO DOCUMENT ó ALL VALUES FICTIONAL ó NOT FOR ENGINEERING USE) Tj ET
+BT /F2 11 Tf 50 756 Td (4. MATERIALS OF CONSTRUCTION) Tj ET
+BT /F1 10 Tf 60 736 Td (Casing) Tj ET
+BT /F1 10 Tf 300 736 Td (ASTM A216 Gr. WCB \(cast carbon steel\)) Tj ET
+BT /F1 10 Tf 60 720 Td (Impeller) Tj ET
+BT /F1 10 Tf 300 720 Td (ASTM A351 Gr. CF8M \(cast 316 stainless steel\)) Tj ET
+BT /F1 10 Tf 60 704 Td (Shaft) Tj ET
+BT /F1 10 Tf 300 704 Td (AISI 420 stainless steel) Tj ET
+BT /F1 10 Tf 60 688 Td (Wear rings \(casing / impeller\)) Tj ET
+BT /F1 10 Tf 300 688 Td (12% chromium stainless steel, hardened) Tj ET
+BT /F1 10 Tf 60 672 Td (Casing gasket) Tj ET
+BT /F1 10 Tf 300 672 Td (Spiral wound, 316 SS with graphite filler) Tj ET
+BT /F1 10 Tf 60 656 Td (Mechanical seal) Tj ET
+BT /F1 10 Tf 300 656 Td (Single cartridge seal, SiC vs carbon faces) Tj ET
+BT /F1 10 Tf 60 640 Td (Casing bolting) Tj ET
+BT /F1 10 Tf 300 640 Td (ASTM A193 B7 / A194 2H) Tj ET
+BT /F1 10 Tf 60 624 Td (Baseplate) Tj ET
+BT /F1 10 Tf 300 624 Td (Fabricated carbon steel, drain rim) Tj ET
+BT /F2 11 Tf 50 594 Td (5. PERFORMANCE \(VENDOR GUARANTEED\)) Tj ET
+BT /F1 10 Tf 60 574 Td (Rated speed) Tj ET
+BT /F1 10 Tf 300 574 Td (2960 rpm) Tj ET
+BT /F1 10 Tf 60 558 Td (Efficiency at rated point) Tj ET
+BT /F1 10 Tf 300 558 Td (78 %) Tj ET
+BT /F1 10 Tf 60 542 Td (NPSH required at rated flow) Tj ET
+BT /F1 10 Tf 300 542 Td (4.2 m) Tj ET
+BT /F1 10 Tf 60 526 Td (Absorbed power at rated point) Tj ET
+BT /F1 10 Tf 300 526 Td (52.4 kW) Tj ET
+BT /F1 10 Tf 60 510 Td (Motor rating) Tj ET
+BT /F1 10 Tf 300 510 Td (75 kW, 400 V, 3 ph, 50 Hz, 2-pole, IP55) Tj ET
+BT /F1 9 Tf 270 40 Td (Page 3 of 4) Tj ET
+
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 1542 >>
+stream
+BT /F2 9 Tf 50 800 Td (IFL ENGINEERING ó DEMO PROJECT) Tj ET
+BT /F1 9 Tf 360 800 Td (Doc No: IFL-DEMO-DS-P-101   Rev: B) Tj ET
+BT /F1 8 Tf 50 786 Td (SYNTHETIC DEMO DOCUMENT ó ALL VALUES FICTIONAL ó NOT FOR ENGINEERING USE) Tj ET
+BT /F2 11 Tf 50 756 Td (6. INSPECTION AND TESTING) Tj ET
+BT /F1 10 Tf 60 736 Td (Hydrostatic test \(casing\)) Tj ET
+BT /F1 10 Tf 300 736 Td (24 barg, 30 min hold ó Witness \(W\)) Tj ET
+BT /F1 10 Tf 60 720 Td (Performance test) Tj ET
+BT /F1 10 Tf 300 720 Td (Witness \(W\)) Tj ET
+BT /F1 10 Tf 60 704 Td (NPSH test) Tj ET
+BT /F1 10 Tf 300 704 Td (Not required) Tj ET
+BT /F1 10 Tf 60 688 Td (Mechanical run test) Tj ET
+BT /F1 10 Tf 300 688 Td (Witness \(W\)) Tj ET
+BT /F1 10 Tf 60 672 Td (Final inspection before shipment) Tj ET
+BT /F1 10 Tf 300 672 Td (Hold \(H\)) Tj ET
+BT /F2 11 Tf 50 642 Td (7. NOTES) Tj ET
+BT /F1 10 Tf 60 622 Td (1. This is a synthetic document created to demonstrate the IFL Engineering) Tj ET
+BT /F1 10 Tf 60 606 Td (   AI Assistant. All tags, values and references are fictional.) Tj ET
+BT /F1 10 Tf 60 590 Td (2. Vendor to confirm casing MAWP and hydrostatic test pressure in the offer.) Tj ET
+BT /F1 10 Tf 60 574 Td (3. All values to be verified against the approved project specification.) Tj ET
+BT /F2 11 Tf 50 544 Td (8. REVISION HISTORY) Tj ET
+BT /F1 10 Tf 60 524 Td (Rev A) Tj ET
+BT /F1 10 Tf 300 524 Td (Issued for Review) Tj ET
+BT /F1 10 Tf 60 508 Td (Rev B) Tj ET
+BT /F1 10 Tf 300 508 Td (Issued for Purchase ó rated flow updated) Tj ET
+BT /F1 9 Tf 270 40 Td (Page 4 of 4) Tj ET
+
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000141 00000 n 
+0000000238 00000 n 
+0000000340 00000 n 
+0000001979 00000 n 
+0000002115 00000 n 
+0000004067 00000 n 
+0000004203 00000 n 
+0000006056 00000 n 
+0000006193 00000 n 
+0000007788 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R >>
+startxref
+7926
+%%EOF

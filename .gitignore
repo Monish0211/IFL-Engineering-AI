@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.env.local
+.env*.local
+npm-debug.log*
+*.tsbuildinfo
+
+# Local RAG runtime data (vector index + uploaded originals) and the
+# downloaded embedding model — both are regenerated automatically.
+/data/
+/.cache/

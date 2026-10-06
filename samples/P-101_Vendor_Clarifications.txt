@@ -1,0 +1,17 @@
+P-101A/B COOLING WATER PUMPS — VENDOR TECHNICAL CLARIFICATIONS
+SYNTHETIC DEMO DOCUMENT — ALL VALUES FICTIONAL — NOT FOR ENGINEERING USE
+
+TQ-01  Seal arrangement
+Vendor proposed a single cartridge mechanical seal with silicon carbide vs carbon faces.
+Response: Accepted.
+
+TQ-02  Motor enclosure
+Vendor offered IP55 motors. Project datasheet requires IP55 minimum.
+Response: Accepted.
+
+TQ-03  Performance test tolerance
+Vendor requested that the performance test be performed at the vendor's works with
+clean cold water. Response: Accepted; the client will witness the test.
+
+TQ-04  Delivery
+Vendor quoted 26 weeks ex-works from purchase order. Response: Noted by procurement.

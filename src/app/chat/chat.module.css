@@ -1,0 +1,869 @@
+/*
+ * Ported from the NeoChat AI reference pen
+ * (https://codepen.io/web-strategist/pen/qEBPQVv) as closely as possible.
+ *
+ * This is the one page in the app that uses a CSS Module instead of
+ * Tailwind utility classes — every other page in this codebase is
+ * Tailwind-only (see icons.tsx's own "no extra dependency" convention for
+ * the same philosophy). The pen's CSS is ~370 lines of custom animations,
+ * dark-mode variable swapping, and markdown/code-block typography that
+ * would lose exactness translated rule-by-rule into utility classes, and
+ * the ask was explicitly to recreate this exactly. A CSS Module keeps it
+ * fully isolated to this one route — it cannot leak into or collide with
+ * any other page's styles.
+ *
+ * Adaptations from the original (documented, not silent):
+ * - `:root { ... }` -> `.page { ... }` and `.dark-mode` -> `.page.darkMode`
+ *   (variables scoped to this page's own wrapper, never the real :root/body
+ *   — the rest of the app's theme is completely untouched).
+ * - The bare `* { ... }` reset -> `.page *` (a real `*` in a CSS Module
+ *   is NOT scoped by Next.js and would apply site-wide — that would have
+ *   broken every other page).
+ * - `.container`/`.app-container` height: the reference pen is a
+ *   standalone full-viewport tool (`height: 100vh`); here it sits inside
+ *   this app's existing Header/Sidebar/Breadcrumb chrome, so it fills the
+ *   remaining space instead of the full viewport.
+ */
+
+.page {
+  --primary-color: #7c4dff;
+  --secondary-color: #b388ff;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --background-primary: #fff;
+  --background-secondary: #f5f7fb;
+  --background-tertiary: #edf0f7;
+  --ai-message-bg: #f0f4ff;
+  --user-message-bg: #7c4dff;
+  --user-message-text: #fff;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --animation-speed: 0.3s;
+  --border-radius: 12px;
+  --typing-indicator-color: var(--primary-color);
+
+  color: var(--text-primary);
+}
+
+.page.darkMode {
+  --primary-color: #9d74ff;
+  --secondary-color: #b388ff;
+  --text-primary: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --background-primary: #1a1a1a;
+  --background-secondary: #252525;
+  --background-tertiary: #333333;
+  --ai-message-bg: #2d2d3d;
+  --user-message-bg: #9d74ff;
+  --user-message-text: #fff;
+  --border-color: #444;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+}
+
+.page * {
+  box-sizing: border-box;
+  transition: background-color var(--animation-speed), color var(--animation-speed);
+}
+
+.codeCopyContainer {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+}
+
+.codeCopyButton {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.codeCopyButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.codeCopyButton.copied {
+  background-color: #4caf50;
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 640px;
+}
+
+.appContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 640px;
+  background-color: var(--background-primary);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 30px var(--shadow-color);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background-color: var(--background-tertiary);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: var(--primary-color);
+}
+
+.logo svg {
+  margin-right: 10px;
+  height: 22px;
+  width: 22px;
+}
+
+.newChatBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.newChatBtn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.newChatBtn svg {
+  margin-right: 8px;
+  height: 14px;
+  width: 14px;
+}
+
+.historyContainer {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.historyContainer h3 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  padding-left: 5px;
+  font-weight: 600;
+}
+
+.chatHistoryItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: var(--border-radius);
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+}
+
+.chatHistoryItem span {
+  white-space: nowrap;
+  width: 16ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chatHistoryItem:hover {
+  background-color: var(--background-secondary);
+}
+
+.chatHistoryItem.active {
+  background-color: rgba(124, 77, 255, 0.1);
+  font-weight: 500;
+}
+
+.chatHistoryItem svg {
+  margin-right: 10px;
+  color: var(--text-secondary);
+  height: 14px;
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.settings {
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+}
+
+.settings button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px 5px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+}
+
+.settings button:hover {
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+}
+
+.settings button svg {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Chat container */
+.chatContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-primary);
+  min-width: 0;
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.currentChatTitle {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+}
+
+.headerActions button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+  display: flex;
+}
+
+.headerActions button:hover {
+  color: var(--primary-color);
+  background-color: var(--background-tertiary);
+}
+
+.headerActions svg {
+  height: 16px;
+  width: 16px;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.message {
+  display: flex;
+  margin: 25px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.messageContent {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.messageAi {
+  justify-content: flex-start;
+}
+
+.messageUser {
+  justify-content: flex-end;
+}
+
+.messageAi .messageContent {
+  background-color: var(--ai-message-bg);
+  color: var(--text-primary);
+}
+
+.messageUser .messageContent {
+  background-color: var(--user-message-bg);
+  color: var(--user-message-text);
+}
+
+.messageContent :global(h1) {
+  font-size: 22px;
+  margin: 16px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--primary-color);
+}
+
+.messageContent :global(h2) {
+  font-size: 18px;
+  margin: 14px 0 8px;
+}
+
+.messageContent :global(h3) {
+  font-size: 16px;
+  margin: 12px 0 6px;
+}
+
+.messageContent :global(ul),
+.messageContent :global(ol) {
+  margin: 8px 0;
+  padding-left: 25px;
+}
+
+.messageContent :global(li) {
+  margin-bottom: 5px;
+}
+
+.messageContent :global(blockquote) {
+  border-left: 4px solid var(--primary-color);
+  padding: 0 0 0 15px;
+  margin: 10px 0;
+  color: var(--text-secondary);
+}
+
+.messageContent :global(table) {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.messageContent :global(th),
+.messageContent :global(td) {
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.messageContent :global(th) {
+  background-color: var(--background-tertiary);
+  font-weight: 600;
+}
+
+.messageContent :global(a) {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.messageContent :global(a:hover) {
+  text-decoration: underline;
+}
+
+.messageContent :global(hr) {
+  border: none;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 15px 0;
+}
+
+.typingIndicator {
+  display: flex;
+  padding: 15px 25px;
+}
+
+.typingDot {
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background-color: var(--typing-indicator-color);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: typingAnimation 1.5s infinite;
+}
+
+.typingDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+}
+
+.inputArea {
+  padding: 15px 25px 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.inputContainer {
+  display: flex;
+  position: relative;
+  background-color: var(--background-tertiary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.fileUploadButton {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 18px;
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.fileUploadButton:hover {
+  color: var(--primary-color);
+}
+
+.fileUploadButton svg {
+  height: 16px;
+  width: 16px;
+}
+
+.textarea {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 15px;
+  font-size: 15px;
+  resize: none;
+  max-height: 150px;
+  color: var(--text-primary);
+  outline: none;
+  font-family: inherit;
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.sendButton {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  width: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sendButton:hover {
+  background-color: var(--secondary-color);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sendButton svg {
+  height: 16px;
+  width: 16px;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.pendingFilePreview {
+  margin: 10px 0;
+}
+
+.introMessage {
+  text-align: center;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(--background-primary);
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.introMessage h1 {
+  color: var(--primary-color);
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.introMessage p {
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+  font-size: 16px;
+}
+
+.suggestionChips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.suggestionChip {
+  background-color: var(--background-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.suggestionChip:hover {
+  background-color: var(--background-secondary);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.messageContent :global(pre) {
+  position: relative;
+  background-color: #282c34;
+  border-radius: 8px;
+  padding: 12px;
+  padding-top: 35px;
+  overflow-x: auto;
+  margin: 10px 0;
+  border: 1px solid #3e4451;
+  color: #edf0f7;
+}
+
+.messageContent :global(code) {
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 14px;
+}
+
+.messageContent :global(pre code) {
+  white-space: pre;
+  line-height: 1.5;
+}
+
+.messageContent :global(:not(pre) > code) {
+  background-color: rgba(125, 125, 125, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: var(--primary-color);
+}
+
+.chatOptionsButton {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.chatOptionsButton svg {
+  height: 14px;
+  width: 14px;
+}
+
+.chatOptionsMenu {
+  position: absolute;
+  right: 10px;
+  top: 100%;
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  z-index: 100;
+}
+
+.chatOptionsItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.chatOptionsItem:hover {
+  background-color: var(--background-secondary);
+}
+
+/* ------------------------------------------------------------------------
+ * Engineering AI Assistant (Phase 1): citations, document notices, and the
+ * sidebar knowledge panel. Uses the same variables as everything above, so
+ * light/dark mode work unchanged.
+ * --------------------------------------------------------------------- */
+
+.aiMessageBody {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  min-width: 0;
+}
+
+.aiMessageBody .messageContent {
+  max-width: 100%;
+}
+
+.sources {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--background-secondary);
+  font-size: 13px;
+}
+
+.sourcesTitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.sources ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sources li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  color: var(--text-primary);
+}
+
+.sources li svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--primary-color);
+}
+
+.sourceNumber {
+  font-weight: 600;
+  color: var(--primary-color);
+  min-width: 24px;
+}
+
+.documentNotice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.documentNotice svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.documentNoticeName {
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.documentNoticeMeta {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.pendingDocument {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px dashed var(--primary-color);
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.pendingDocument button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.knowledgePanel {
+  margin-top: 16px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+  max-height: 35%;
+  overflow-y: auto;
+}
+
+.knowledgePanel h3 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+  padding-left: 5px;
+  font-weight: 600;
+}
+
+.knowledgeBase,
+.documentItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--border-radius);
+  font-size: 13px;
+}
+
+.knowledgeBase svg,
+.documentItem > svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--primary-color);
+}
+
+.knowledgeBase span,
+.documentItem span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.documentItem span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.knowledgeBase small,
+.documentItem small {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.documentItem:hover {
+  background-color: var(--background-secondary);
+}
+
+.documentItem button {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  opacity: 0;
+  display: flex;
+}
+
+.documentItem:hover button,
+.documentItem button:focus-visible {
+  opacity: 1;
+}
+
+.documentItem button:hover {
+  color: #e11d48;
+}
+
+.documentItem button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.knowledgeHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 4px 5px 0;
+  line-height: 1.4;
+}
+
+/* Backup-provider notice above an answer (primary AI unavailable → Gemini answered). */
+.providerNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(217, 119, 6, 0.45);
+  background-color: rgba(245, 158, 11, 0.12);
+  color: var(--text-primary);
+  font-size: 12.5px;
+}
+
+.providerNotice svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: #d97706;
+}
